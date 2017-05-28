@@ -1,0 +1,90 @@
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="less">
+  @import "../less/_vars.less";
+
+  html {
+    background-color: @white !important;
+    .page {
+       height: 100%;
+      .content {
+        height: 90%; overflow: hidden;background-color: @white;
+        ul.home-order {
+          height: 100%; position: absolute; left: 0; right: 0; top: 0px;;
+          li {
+            text-align: left; padding-left: 0rem; margin-left: 0rem;
+            height: 48%; position: relative;
+            .maintain-content, .periodicity-content {
+
+            }
+            div {
+              /*background: url(../../static/img/home_temp.png) 50% 50% ; */
+              position: absolute; left: 50%; top: 50%; width: 119px; height: 119px; margin: -70px 0 0 -59px; display: block;
+              text-align: center;
+            }
+          }
+          li:first-child {
+            border-bottom: 1px solid @gray-silver;
+          }
+
+          p { line-height: 25px; }
+        }
+      }
+    }
+  }
+
+</style>
+
+<template>
+  <div class="page" >
+    <div class="hd">
+      <page-header :is-index="true" :title="'工单'"  :left-text="'首页'" :left-icon="'left-arrow'"
+                   :right-circle="'right-circle'"  @page-header-right-click="scanCode"></page-header>
+    </div>
+
+    <section class="content clearfix">
+
+      <ul class="home-order">
+        <li class="order-maintain" @click="orderMaintain">
+          <div class="maintain-content">
+            <span class="icon-fm">
+              <img src="../../static/img/home_temp.png" width="119" height="119">
+          </span>
+          <p>临时工单</p>
+          </div>
+        </li>
+        <li class="order-periodicity" @click="orderPeriodicity">
+          <div class="periodicity-content">
+            <span class="icon-fm">
+              <img src="../../static/img/home_week.png" width="119" height="119">
+            </span>
+            <p>周期工单</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</template>
+
+<script>
+  import PageHeader from '../commonComponents/page-header'
+
+  export default {
+    name: 'home',
+    components: {
+      PageHeader
+    },
+    methods: {
+      orderMaintain () {
+        this.$router.push({ path: '/order-maintain' })
+      },
+      orderPeriodicity () {
+        this.$router.push({ path: '/order-periodicity' })
+      },
+      scanCode () {
+        console.log('index header right-click')
+      }
+    }
+  }
+</script>
+

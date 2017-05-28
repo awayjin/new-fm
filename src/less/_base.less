@@ -1,0 +1,147 @@
+html {
+  font-size: 62.5%;
+  height: 100%;
+  font-family: "PingFang SC","Microsoft YaHei",Arial,Helvetica,sans-serif;
+  background-color: @pbc;
+  color: @fc;
+}
+
+ul, li, ol, h1, h2, h3, p, dl, dt, dd, input, textarea, img { padding: 0; margin: 0; outline: none;}
+ul, li, ol {
+  list-style: none;
+}
+
+span {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: @fc;
+}
+
+.hd, .bd{
+  position: relative;
+}
+.hd { height: 44px; z-index: 14; }
+.bd {
+  margin-bottom: 60px;
+  -webkit-overflow-scrolling: touch;
+}
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.abs-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.abs-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.font-over-flow {
+  white-space:nowrap;
+  word-break: break-all;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.font-over-hide {
+  white-space:nowrap;
+  word-break: break-all;
+  overflow:hidden;
+}
+
+.opacity100{
+  opacity: 1 !important;
+}
+
+.opacity50{
+  opacity: .5 !important;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.g-shadow-up {
+  box-shadow: 0px -1px 1px 0 #dedede;
+}
+
+.g-shadow-down {
+  box-shadow: 0px 3px 3px 0 #dedede;
+}
+
+// Tips
+.log-wrap {
+  position: fixed; top: 40%; left: 20%;  width: 60%; z-index: 20;
+  .log-tip { padding: 15px;   border: 1px solid transparent; text-align: center;  border-radius: 5px;    background-color:  @gray-base * 3;  color: @white;  font-size: 1.6rem;  opacity: 0.95; word-break: break-all }
+  .close {  float: right; font-size: 21px;    font-weight: bold;    line-height: 1;    color: @white;    text-shadow: 0 1px 0 @white; position: absolute; right: .7rem; top: 30%;  }
+}
+
+// 图标--位置 超时 二维码
+.address, .overtime, .qrcode, .address-big {
+  position: relative; color: @gray-cool; padding-left: 1.8rem; font-size: 1.4rem;
+  .address-icon, .overtime-icon, .qrcode-icon {
+    position: absolute; left: 0px; top: .3rem; background: url("../../static/img/address.png") no-repeat ; .half(); width: 20px; height: 26px;
+  }
+  .overtime-icon {
+    background: url("../../static/img/overtime.png") no-repeat; .half(); width: 24px; height: 24px; top: .6rem;
+  }
+
+  .qrcode-icon {
+    background: url("../../static/img/qrcode.png") no-repeat; .half(); width: 26px; height: 26px; top: .6rem;
+  }
+}
+
+// 图标--大位置
+.address-big {
+  .address-icon {
+    background: url("../../static/img/address_big.png") no-repeat; .half(); width: 28px; height: 34px; top: .4rem;
+  }
+}
+
+// 向上箭头图标
+.tri-icon {
+  background: url("../../static/img/tri_top.png") no-repeat; .half(); width: 24px; height: 16px;
+}
+
+// 拍摄照片
+.photo-add {
+  background: url("../../static/img/photo_add.png") no-repeat; .half(); width: 120px; height: 120px; text-indent: -9999px;
+}
+
+// 删除图标
+.remove {
+  background: url("../../static/img/remove.png") no-repeat; .half(); width: 34px; height: 34px; display: inline-block;
+}
+
+// 扫描二维码
+.qrcode-scan {
+  background: url("../../static/img/qrcode_big.png") no-repeat; .half(); width: 130px; height: 130px; text-indent: -9999px;
+}
+
+// 向右箭头
+.tri {
+  &:after {
+    content: ''; display: inline-block; background: url("../../static/img/tri.png") no-repeat; background-size: 50% 50%;
+    width: 16px; height: 24px;
+    position: relative; top: 1.2rem; left: .6rem;
+  }
+}

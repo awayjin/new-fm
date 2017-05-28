@@ -1,0 +1,34 @@
+/**
+ * Created by jinw01 on 2017/5/9.
+ */
+import LocalStorage from 'local-storage'
+
+export default {
+  install (Vue) {
+    Vue.prototype.$appConfig = {
+      // 路径
+      url: {
+        homepage: ''
+      },
+      // 提示信息
+      tips: {
+        serverError: '服务器异常',
+        noData: '暂无数据',
+        loadError: '加载失败',
+        loading: '加载中...',
+        successNoData: '请求成功,无数据! 状态码:',
+        reqError: '请求错误 ',
+        lastTip: '已是最后一页!'
+      },
+      // 远程资源
+      api: {
+        orderMaintain (number) {
+          return `/static/datum/order-maintain.json?${number}`
+          // return `/mend/query/mendOrderList`
+        }
+      },
+      // 离线存储
+      ls: LocalStorage
+    }
+  }
+}

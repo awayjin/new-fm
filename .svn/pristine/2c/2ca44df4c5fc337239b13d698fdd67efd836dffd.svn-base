@@ -1,0 +1,34 @@
+/*筛选*/
+.filter-box {
+  position: absolute;  bottom: 0; left: 0; right: 0; top: 7.9rem; .css3-flex();
+  background-color: @white;  z-index: 13; width: 100%; height: 100%;
+  li {
+    line-height: 4.2rem; height: 4.2rem;
+    color: @gray-charcoal; font-size: 1.5rem; position: relative;
+  }
+  li:after {
+    background-position: -42px -62px; position: absolute; content: ""; right: 1.3rem; top: 48%; width: 11px; height: 12px;
+  }
+  .bg {
+    border-bottom: 1px solid @gray-light; margin: 0px 0 0 1.5rem; position: relative; z-index: 1; left: 0; right: 0;
+    overflow: hidden; height: 4.2rem; text-overflow: ellipsis;
+    //padding: 1.5rem 0 1rem;
+  }
+  .filter-one {
+  .ios-scroll(); overflow: auto; height: 100%;width: 40%; background-color: @gray-list-bg; border-right: 1px solid @gray-light;
+    ul {
+      background-color: @white;  padding-bottom: 8.2rem;
+    }
+    h2 { height: 2.5rem; font-size: 1.2rem; color: @gray-cool; border: 1px solid @gray-light; border-width: 1px 0;  }
+    h2 span {display: inline-block; margin: .6rem 0 0 .9rem; }
+    li:last-child .bg { border-bottom: 0; }
+  }
+  .space-one {  width: 100% !important; }
+
+  .filter-two { overflow: auto; width: 60%; .ios-scroll();  padding-bottom: 8.2rem; }
+  .filter-three { overflow: auto; display: none; }
+  .current { background-color: @gray-list-bg; color: @green-emerald; }
+  .sprite-icon {
+    background-position: -42px -62px; position: absolute;  content: "";  right: 1.3rem;  top: 45%; width: 11px; height: 12px;
+  }
+}

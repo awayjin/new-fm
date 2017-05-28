@@ -1,0 +1,49 @@
+<template>
+  <div  v-infinite-scroll="loadMore" infinite-scroll-disabled="busyOrLast" infinite-scroll-distance="0">
+    <slot></slot>
+    <div class="loading-wrap" v-show="busy"><span class="loading"></span>加载中...</div>
+
+    <div class="loading-wrap last-none" v-show="isTheLastPage">----我是有底线的----</div>
+  </div>
+</template>
+
+<script>
+  import infiniteScroll from 'vue-infinite-scroll'
+  export default {
+    props: {
+      // 判断是否最后一页
+      isTheLastPage: {
+        type: Boolean,
+        default: false
+      },
+      // 判断是否处于繁忙状态
+      busy: {
+        type: Boolean,
+        default: false
+      },
+      // 请求错误
+      listError: {
+        type: Boolean,
+        default: false
+      }
+    },
+    directives: { infiniteScroll },
+    computed: {
+      busyOrLast () {
+        return this.busy || this.isTheLastPage
+      },
+      errorOrBusy () {
+        return this.busy || this.isTheLastPage
+      }
+    },
+    methods: {
+      loadMore: function () {
+        // （当前组件与父组件）置于繁忙状态
+//        this.busy = true
+        // 传递“加载下一页“事件给父组件
+//        this.$dispatch(this.nextPageEvent)
+        this.$emit('next-page-event')
+      }
+    }
+  }
+</script>

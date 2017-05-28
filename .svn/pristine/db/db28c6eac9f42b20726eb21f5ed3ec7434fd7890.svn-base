@@ -1,0 +1,64 @@
+/* task */
+.content {
+  position: absolute; top: 90px;  left: 0; right: 0;  .ios-scroll();   font-size: 1.4rem;
+
+  .filter-line {
+    background-color: @white; padding: .8rem 1.3rem; border-bottom: 1px solid @gray-light;
+    .css3-flex();
+  }
+  .filter-item {
+    background-color: @gray-bg; border-radius: .4rem; display: inline-block; padding: .4rem 1rem .4rem; position: relative;
+    .css3-flex(); margin-right: .8rem;
+    .triangle {
+      position: relative; top: .6rem; left: .3rem;
+      border: .4rem solid transparent;
+      font-size: 0;
+      width: 0;
+      height: 0;
+      border-top-color: @gray-cool;
+      .css3-transition(0.1s)
+    }
+
+    .triangle-up {
+      // border: .4rem solid transparent; border-top-color: transparent; border-bottom-color: @gray-cool;
+      transform: rotate(180deg);
+      top: .3rem;
+    }
+
+  }
+
+  position: absolute; top: 44px; bottom: 0px; left: 0; right: 0; overflow: hidden; .ios-scroll();
+
+  .filter-wrap {
+    position: absolute; top: 0px; bottom: 0; left: 0; right: 0;
+  }
+  .task-list-none {
+    font-size: 1.6rem; color: @gray-base * 6; text-align: center; margin-top: 4rem;
+    span.task-none { background-size: 100%;  height: 82px; display: block;  width: 104px;  margin: 0 0 2rem -62px; position: relative; left: 50%; }
+  }
+  .project-list {
+    li {
+      position: relative; background-color: @white; margin-bottom: .5rem; padding: .8rem 1rem 1.3rem 1rem;
+    }
+    position: absolute; top: 93px;  bottom: 0;  left: 0; right: 0;  .ios-scroll();   font-size: 1.4rem; overflow: auto;
+
+  }
+
+  .gap-far { margin-bottom: 4.7rem;}
+  .device-list {  overflow: hidden;  }
+  .device-list li { background-color: #fff; height: 9.6rem; margin: .0rem 0 .5rem; padding: .3rem 1.5rem 0 1rem; position: relative; }
+  .wait-list li {  padding: 0 }
+  .temp {padding: .3rem 1.5rem 0 1rem; height: 100%; width: 100%; display: block;  }
+  .device-title { font-size: 1.6rem; font-weight: bold; margin: 1.2rem 0 1.2rem; width: 18rem;   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal; padding-top: .1rem; }
+  .d-ago { position: absolute; right: 0px; color: #979799; }
+  .d-time { font-size: 1.2rem; color: #656566; position: relative; padding-left: 2rem; }
+  .order-btn { position: absolute; right: 1.5rem; top: 1.7rem; width: 7.2rem; height: 3.4rem; line-height: 3.4rem; border-radius: 2px; background-color: #fff; border: 1px solid #00984b; text-align: center; font-size: 1.6rem;  color: #00984b; }
+  .d-address {  font-size: 1.2rem; color: #979799; margin-bottom: 1.4rem; position: relative; padding-left: 2rem; max-width: 28rem;   text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;  }
+  .d-address span { position: absolute; left: 0px; top: -3px; background-position: -8px -131px; width: 13px; height: 17px;  }
+  .time-icon {position: absolute; left: 0px; top: -2px; background-position: -31px -132px; width: 15px; height: 15px; }
+
+  .order-btn-hover, .scroll-device .order-btn:hover { background-color: #C6E9D8; }
+  .order-btn-done { background-color: #fff; color: #CFCFD1; border: 1px solid #D0D0D1;  }
+  .fire-icon { width: 34px; height: 16px; background-position: 0 -72px; margin: 0px 0 0 2px; position: relative; top: 2px; }
+
+}

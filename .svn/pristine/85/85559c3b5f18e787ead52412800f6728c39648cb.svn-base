@@ -1,0 +1,243 @@
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="less">
+  @import "../less/_vars.less";
+  @import "../less/_project_list.less";
+  @import "../less/_filter_item.less";
+
+</style>
+
+<template>
+  <div class="page" >
+    <div class="hd">
+      <page-header :return-main="true"  :title="'维修工单'"  :left-text="'返回'" :left-icon="'left-arrow'"></page-header>
+    </div>
+
+    <section class="content clearfix">
+      <div class="filter-wrap">
+        <maintain-header :active-path="'waiting'"></maintain-header>
+        <div class="filter-line">
+          <div class="filter-item" :class="{ 'filter-current': toggleProject }" @click="filterProject">
+            <span>项目</span> <i class="triangle"></i>
+          </div>
+          <div class="filter-item"  :class="{ 'filter-current': toggleDevice }" @click="filterDevice">
+            <span>设备类型</span> <i class="triangle"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+
+        <div class="task-list-none" v-show="listNone">
+          <span class="task-none"></span>
+          还没有待接单哦~
+        </div>
+
+        <div class="list-have project-list" v-if="listHave">
+          <page-scroller  @next-page-event="loadMore" :busy="busy" :is-the-last-page="listEnd">
+            <ul  >
+              <!--<li >
+                <h2 class="device-title"> 深圳22荔房设备</h2>
+                <p class="d-address"><span></span>北京东第居围合</p>
+                <div class="d-time">
+                  <span class="time-icon"></span>
+                  <span class="ng-binding">预约时间：2015-11-27 10:50:06</span>
+                  <span class="d-ago"> 2853</span>
+                </div>
+
+               <div class="order-btn">
+                抢单
+              </div>
+              </li>-->
+
+              <li v-for="item in itemList">
+                <h2 class="device-title">{{ item.content }}</h2>
+                <p class="d-address "> <span class="time-icon"></span> {{ item.projectName }}</p>
+                <p class="dev">  <span class="time-icon"></span> {{ item.deviceTypeName }}</p>
+                <div class="d-time">
+                  <span class="item-time">{{ item.createTime }}</span>
+                  <span class="isfrom-fm" v-if="item.comeFM"> 来自FM</span>
+                </div>
+
+                <div class="order-btn">
+                  接单
+                </div>
+              </li>
+            </ul>
+          </page-scroller>
+
+        </div>
+
+        <div class="task-list-none" v-if="listError">
+          服务器异常
+        </div>
+
+        <!--筛选项目 Begin-->
+        <section class="filter-box clearfix"  v-show="toggleProject" >
+          <!-- 一级 Begin -->
+          <div class="filter-one" >
+            <ul>
+              <li class="current">
+                <div class="bg">供配电设备</div>
+              </li>
+              <li v-for="(i, index) in 18">
+                <div class="bg">供配电设备 {{ index }}</div>
+              </li>
+            </ul>
+          </div>
+          <!-- 一级 End -->
+
+          <!-- 二级 Begin-->
+          <div class="filter-two" >
+            <ul>
+              <li  >
+                <div class="bg">A供配电设备</div><span class="sprite-icon" ></span>
+              </li>
+            </ul>
+          </div>
+          <!-- 二级 End-->
+
+        </section>
+        <!--筛选项目 End-->
+
+        <!--筛选设备 Begin-->
+        <section class="filter-box clearfix"  v-show="toggleDevice" >
+          <!-- 一级 Begin -->
+          <div class="filter-one" >
+            <ul>
+              <li v-for="(one, index) in oneFacility" @click="filterTwo(one, $event)" :class="{current: one === selected }">
+                <div class="bg"> {{ one.name }}</div>
+              </li>
+            </ul>
+          </div>
+          <!-- 一级 End -->
+
+          <!-- 二级 Begin-->
+          <div class="filter-two" >
+            <ul>
+              <li v-for="two in twoFacility" @click="fitlerRequestDevice(two)" :class="{current: two === selectedTwo }">
+                <div class="bg">{{ two.name }}</div>
+              </li>
+            </ul>
+          </div>
+          <!-- 二级 End-->
+
+        </section>
+        <!--筛选设备 End-->
+
+      </div>
+    </section>
+
+    <page-loading :show-loading="showLoading"></page-loading>
+
+  </div>
+</template>
+
+<script>
+  import PageHeader from '../commonComponents/page-header.vue'
+  import MaintainHeader from '../components/maintain-header.vue'
+  import PageLoading from '../commonComponents/page-loading.vue'
+  import PageScroller from '../commonComponents/page-scroller.vue'
+  import facilityData from '../setting/page-facility-data'
+
+  export default {
+    name: 'maintain-receiving',
+    components: {
+      PageHeader,
+      MaintainHeader,
+      PageScroller,
+      PageLoading
+    },
+    data () {
+      return {
+        itemList: [],
+        toggleProject: false,
+        toggleDevice: false,
+        showLoading: false,
+        busy: false, // 加载中
+        oneFacility: facilityData.oneFacility(), // 一级设备数据
+        twoFacility: [], // 联动二级数据
+        selected: null, // 联动二级数据
+        selectedTwo: null, // 联动二级数据
+        nextPage: 1, // 下一页
+        listEnd: false, // 最后一页
+        listNone: false,
+        listError: false,
+        listHave: true
+      }
+    },
+    computed: {
+      isBusy () {
+        return this.busy
+      }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        this.loadList()
+      })
+    },
+    methods: {
+      filterTwo (one) {
+        this.selected = one // 选中状态
+//        this.twoFacility.splice(0, this.twoFacility.length)
+//        this.twoFacility = []
+        this.twoFacility = facilityData.twoFacility[one.code] // 二级数据
+        console.log('length:' + this.twoFacility.length + 'one.code:' + one.code)
+      },
+      fitlerRequestDevice (two) {
+        this.selectedTwo = two
+      },
+      loadMore: function () {
+        this.busy = true
+        setTimeout(() => {
+//          this.busy = false
+          console.log('t:' + this.busy)
+          let url = this.$appConfig.api.orderMaintain(this.nextPage)
+          this.$http.get(url).then((res) => {
+            let resData = res.data
+            if (resData.data && res.status === 200) {
+//              debugger
+              if (resData.data.orderList.length === 0 && this.itemList.length === 0) {
+                this.listNone = true
+                this.listHave = false
+              }
+              this.itemList = this.itemList.concat(resData.data.orderList)
+              this.nextPage++
+              this.busy = false
+              this.listEnd = this.nextPage > resData.data.totalRow
+            } else {
+              console.error('获取数据失败..')
+            }
+          }, (res) => {
+            console.log('error:' + res)
+            this.listError = true
+            this.listHave = false
+            this.busy = false
+          })
+        }, 1000)
+      },
+      loadList () {
+//        console.log('load-list')
+      },
+      // 筛选项目
+      filterProject () {
+        this.toggleDevice = false
+        this.toggleProject = !this.toggleProject
+      },
+      // 筛选设备类型
+      filterDevice (arg) {
+        this.toggleProject = false
+        this.toggleDevice = !this.toggleDevice
+      },
+      orderMaintain () {
+        this.$route.router.go('/order-maintain')
+      },
+      orderPeriodicity () {
+        this.$route.router.go('/exception/403')
+      },
+      scanCode () {
+        console.log('index header right-click')
+      }
+    }
+  }
+</script>
+

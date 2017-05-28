@@ -1,0 +1,20 @@
+#add by awayjin-258246377@qq.com 2017-05-09
+.DS_Store
+._*
+
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+bower_components
+.sass-cache
+.vscode
+npm-debug.log
+yarn-error.log
+
+!source/build
+
+.idea
+/target/

@@ -1,0 +1,165 @@
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="less">
+  @import "../less/_vars";
+  @import "../less/_project_list";
+
+  .content {
+
+
+  }
+
+</style>
+
+<template>
+  <div class="page" >
+    <div class="hd">
+      <page-header :return-main="true"  :title="'维修工单'"  :left-text="'返回'" :left-icon="'left-arrow'"></page-header>
+    </div>
+
+    <section class="content clearfix">
+      <div class="filter-wrap">
+        <maintain-header :active-path="'waiting'"></maintain-header>
+        <div class="filter-line">
+          <div class="filter-item"><span>项目</span> <i class="triangle"></i></div>
+          <div class="filter-item"><span>设备类型</span> <i class="triangle triangle-up"></i></div>
+        </div>
+      </div>
+
+      <div class="project-list">
+
+        <div class="task-list-none" v-show="listNone">
+          <span class="task-none"></span>
+          还没有待接单哦~
+        </div>
+
+        <div class="task-list-none" v-show="listError">
+          服务器异常
+        </div>
+
+        <div class="list-have" v-show="listHave">
+          <!--<page-scroller  v-infinite-scroll="loadMore" infinite-scroll-disabled="busyOrLast" infinite-scroll-distance="10">-->
+          <page-scroller  @next-page-event="loadMore" v-bind:busy="busy" :is-the-last-page="listEnd">
+            <ul  >
+              <!--<li >
+                <h2 class="device-title"> 深圳22荔房设备</h2>
+                <p class="d-address"><span></span>北京东第居围合</p>
+                <div class="d-time">
+                  <span class="time-icon"></span>
+                  <span class="ng-binding">预约时间：2015-11-27 10:50:06</span>
+                  <span class="d-ago"> 2853</span>
+                </div>
+
+               <div class="order-btn">
+                抢单
+              </div>
+              </li>-->
+
+              <li v-for="item in itemList">
+                <h2 class="device-title">{{ item.content }}</h2>
+                <p class="d-address"><span></span>{{ item.projectName }}</p>
+                <p class="device-name"><span></span>{{ item.deviceTypeName }}</p>
+                <div class="d-time">
+                  <span class="time-icon"></span>
+                  <span class="ng-binding">预约时间：{{ item.createTime }}</span>
+                  <span class="d-ago"> 2853</span>
+                </div>
+
+                <div class="order-btn">
+                  抢单
+                </div>
+              </li>
+            </ul>
+          </page-scroller>
+        </div>
+
+        <!--<div class="loading-wrap" v-show="busy"><span class="loading"></span>加载中...</div>
+        <div class="loading-wrap last-none" v-show="listEnd">&#45;&#45;我是有底线的！&#45;&#45;</div>-->
+
+      </div>
+    </section>
+
+    <page-loading :show-loading="showLoading"></page-loading>
+
+  </div>
+</template>
+
+<script>
+  import PageHeader from '../commonComponents/page-header'
+  import MaintainHeader from '../components/maintain-header.vue'
+  import PageLoading from '../commonComponents/page-leading.vue'
+  import PageScroller from '../commonComponents/page-scroller.vue'
+
+  export default {
+    name: 'maintain-receiving',
+    components: {
+      PageHeader,
+      MaintainHeader,
+      PageScroller,
+      PageLoading
+    },
+    data () {
+      return {
+        itemList: [],
+        showLoading: false,
+        busy: false, // 加载中
+        nextPage: 1, // 下一页
+        listEnd: false, // 最后一页
+        listNone: false,
+        listError: false,
+        listHave: true
+      }
+    },
+    computed: {
+      isBusy () {
+        return this.busy
+      }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        this.loadList()
+      })
+    },
+    methods: {
+      loadMore: function () {
+        this.busy = true
+        setTimeout(() => {
+//          this.busy = false
+          console.log('t:' + this.busy)
+          let url = this.$appConfig.api.orderMaintain(this.nextPage)
+          this.$http.get(url).then((res) => {
+            let resData = res.data
+            if (resData.data && res.status === 200) {
+              if (resData.data.publishedNotice.length === 0 && this.itemList.length === 0) {
+                this.listNone = true
+                this.listHave = false
+              }
+              this.itemList = this.itemList.concat(resData.data.publishedNotice)
+              this.nextPage++
+              this.busy = false
+              this.listEnd = this.nextPage > resData.totalPage
+            } else {
+              console.error('获取数据失败..')
+            }
+          }, (res) => {
+            console.log('error:' + res)
+            this.listError = true
+            this.busy = false
+          })
+        }, 1000)
+      },
+      loadList () {
+//        console.log('load-list')
+      },
+      orderMaintain () {
+        this.$route.router.go('/order-maintain')
+      },
+      orderPeriodicity () {
+        this.$route.router.go('/exception/403')
+      },
+      scanCode () {
+        console.log('index header right-click')
+      }
+    }
+  }
+</script>
+

@@ -1,0 +1,180 @@
+.content-detail {
+  overflow: hidden;
+}
+.detail {
+  .work-detail {
+    padding-bottom: 8.5rem;
+  }
+  position: absolute; top: 3.5rem; bottom: 0rem; left: 0; right: 0;
+  overflow: auto; height: 100%;
+  .submit-btn-fixed {
+    background-color: @white; position: fixed; bottom: 0; left: 0; right: 0;  box-shadow: -1px -1px 1px @gray-white;
+    height: 5.5rem;
+  }
+  .w-center {
+    .css3-flex();
+  }
+  .w-btn {
+    -webkit-appearance: none; background-color: @white; border: 0; .css3-flex-1(); height: 5.5rem; line-height: 5.5rem;
+    font-size: 1.6rem; color: @gray-brownish;
+  }
+  .btn-transfer {
+    flex: 1.8;
+  }
+  .btn-start {
+    background-color: @green-emerald; flex: 1.4; color: @white; border-radius: .1rem;
+  }
+  .btn-assist {
+    border-right: 1px solid @gray-light;
+  }
+}
+.detail-base {
+  background-color: @white; padding: 1rem 0 1rem 1.2rem; margin-top: .4rem; color: @gray-cool; font-size: 1.4rem;
+  h2 {
+    font-size: 1.6rem; color: @gray-charcoal; padding-bottom: .5rem;
+  }
+  .overtime {
+    padding: .3rem 0 .5rem 1.8rem;
+  }
+  .base-line {
+    border-bottom: 1px solid @gray-light; padding-bottom: .3rem;
+  }
+  .base-tol {
+    padding-top: .8rem; line-height: 2rem;
+  }
+}
+
+.content-item {
+  margin-top: .5rem; line-height: 2.5rem; /* overflow: hidden;*/
+  // 内容标题
+  .order-detail-show {
+    background-color: @white; padding: 1rem 1.2rem; color: @gray-cool; position: relative;
+    h2 {
+      font-size: 1.6rem; color: @green-emerald;
+    }
+    .status {
+      position: absolute; top: 1rem; right: 1.5rem;
+    }
+    .tri-icon {
+      position: absolute; bottom: 1.2rem; right: .6rem; .css3-transition(0.2s)
+    }
+    .tri-icon-rotate {
+      transform:rotate(180deg); bottom: 1.8rem; right: 1.7rem;
+    }
+  }
+  // 内容
+  .order-detail-hide {
+    padding: 1.2rem 0 1.2rem 1.2rem; color: @gray-charcoal;
+    .wor-til {
+      font-size: 1.6rem; position: relative; padding-left: 3.5rem; line-height: 2.5rem; margin-bottom: 1.2rem;
+      .text {
+        .two-line();
+      }
+      .num {
+        font-size: 1.6rem; width: 2.6rem; height: 2.6rem; line-height: 2.6rem; border: 1px solid @gray-light; text-align: center;
+        border-radius: 50%; position: absolute; left: 0; box-shadow: 1px 1px 1px @gray-light;
+      }
+    }
+    dd {
+      padding-right: 1.2rem;
+      // photo
+      margin-bottom: 1.5rem;
+      .del-con { .css3-flex(); }
+      .file {
+        width: 65px; height: 65px;  margin-top: -.2rem; overflow: hidden;
+      }
+      .img-wrap {
+        position: relative; margin-right: 1rem;
+        .f-close {
+          position: absolute; top: -.5rem; right: -1.2rem;
+        }
+        .img-tmp {
+          width: 60px; height: 60px; overflow: hidden; background-color: @gray-cool; margin-right: 1rem;
+          .remove {
+            position: relative; top: -5rem; left: -.5rem;
+          }
+        }
+      }
+      .del-con {
+        margin-left: 3.5rem;
+      }
+
+      // qrcode
+      .file-code {
+        overflow: hidden; position: relative;
+        .qrcode-scan {
+          position: absolute;
+        }
+      }
+      // 单行
+      .single-text {
+        border: 1px solid @gray-light; height: 2.8rem; line-height: 2.8rem; border-radius: .2rem; padding: 0 .5rem;
+        background-color: transparent; width: 100%;  -webkit-appearance:none;
+      }
+      // 单选
+      .mui-checkbox {
+        position: relative; top: .4rem; border-radius: 20px;width: 2.2rem;  height:2.2rem; outline: none; margin-right: 1rem;  background-color: @white;  border: solid 1px @gray-light; background-clip: padding-box;  display: inline-block;
+      }
+      .radio-s { width: 5rem; .css3-flex-1(); font-size: 1.6rem; color: @gray-cool; }
+      .mui-checkbox:checked {    background-color: @gray-silver; }
+      // 多行
+      .m-tex {
+        border: 1px solid @gray-light; height: 8.8rem;  border-radius: .2rem; padding: .6rem .5rem;
+        background-color: transparent; width: 100%; border-width: 1px 0;  -webkit-appearance:none;
+      }
+      .rem-num {
+        width: 100%;flex: none; text-align: right; font-size: 1.2rem; color: @gray-cool; margin-top: -.9rem;
+        position: relative; right: 1rem;
+      }
+      .m-con { display: block; overflow: hidden;  }
+      .regular-checkbox {
+        width: 2.2rem; height: 2.2rem; border: 1px solid @gray-light;
+      }
+      .regular-checkbox:checked {    background-color: @gray-silver; }
+      .m-che {
+        display: block;
+        .checkbox-s {
+          margin:  0 1.2rem 0 .8rem; position: relative; top: -.4rem; color: @gray-cool;
+        }
+      }
+
+    }
+    .m-dd {
+      padding-right: 0rem;
+      .text {
+        padding-right: 1.2rem
+      }
+
+    }
+  }
+}
+
+// 协助记录
+.assist-content {
+  background-color: @white;
+  .assist-list {
+    margin-top: .5rem;   font-size: 1.6rem; color: @gray-brownish;
+    padding-left: 1rem;
+    li {
+      .css3-flex();border-bottom: 1px solid @gray-light;
+      padding: 1.2rem 3rem 1.2rem 1rem; text-align: left;
+
+      p {
+        white-space: nowrap; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;
+      }
+      .assist-name {
+        width: 7rem; margin-right: .0rem;
+      }
+      .assist-content {
+         text-overflow:ellipsis;  width:90%;
+      }
+
+    }
+    .tri {
+      &:after {
+        top: .8rem; left: 2.2rem;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,38 @@
+{
+  "data": {
+    "publishedNotice":
+    [
+      {
+        "orderId":10212,
+        "orderStatus":2010,
+        "content":"断电器无法自动合闸",
+        "projectName":"万科金域华府",
+        "deviceTypeName":"供配电系统",
+        "comeFM":1,
+        "createTime":123456789
+      },
+      {
+        "orderId":10212,
+        "orderStatus":2010,
+        "content":"断电器无法自动合闸",
+        "projectName":"万科金域华府",
+        "deviceTypeName":"供配电系统",
+        "comeFM":1,
+        "createTime":123456789
+      },
+      {
+        "orderId":10212,
+        "orderStatus":2010,
+        "content":"断电器无法自动合闸",
+        "projectName":"万科金域华府",
+        "deviceTypeName":"供配电系统",
+        "comeFM":1,
+        "createTime":123456789
+      }
+    ]
+  },
+  "status": 1,
+  "totalPage": 3,
+  "message": "成功",
+  "errorCode": null
+}

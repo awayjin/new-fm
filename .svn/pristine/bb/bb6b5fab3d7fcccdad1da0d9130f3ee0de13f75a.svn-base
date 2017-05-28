@@ -1,0 +1,29 @@
+export default {
+  routes: [
+    // FM主页
+    {
+      path: '/',
+      component: resolve => require(['../pages/home.vue'], resolve)
+    },
+    // 维修工单-待接单
+    {
+      path: '/order-maintain',
+      component: resolve => require(['../pages/orderMaintain.vue'], resolve)
+    },
+    // 维修工单-待处理
+    {
+      path: '/order-maintain-pending',
+      component: resolve => require(['../pages/orderMaintainPending.vue'], resolve)
+    },
+    // 维修工单-待验收
+    {
+      path: '/order-maintain-checking',
+      component: resolve => require(['../pages/orderMaintainChecking.vue'], resolve)
+    },
+    // 维修工单-已完成
+    {
+      path: '/order-maintain-done',
+      component: resolve => require(['../pages/orderMaintainDone.vue'], resolve)
+    }
+  ]
+}

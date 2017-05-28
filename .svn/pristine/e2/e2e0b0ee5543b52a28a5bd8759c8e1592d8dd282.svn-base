@@ -1,0 +1,69 @@
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="less">
+  @import "../less/_vars";
+
+  .content {
+    ul.home-order {
+      background-color: #fff;
+      li {
+        height: 6rem; line-height: 6rem; text-align: left; padding-left: .5rem; margin-left: .5rem;
+        span {
+        }
+      }
+      li:first-child {
+        border-bottom: 1px solid @gray-silver;
+      }
+      .order-maintain {
+        span {
+          background-position: -35px -16px; width: 55px; height: 33px;
+        }
+      }
+      .order-periodicity {
+        span {
+          background-position: -35px -16px; width: 55px; height: 33px;
+        }
+      }
+    }
+  }
+
+</style>
+
+<template>
+  <div class="page" >
+    <div class="hd">
+      <page-header :is-index="true" :title="'工单'"  :left-text="'首页'" :left-icon="'left-arrow'"
+                   :right-circle="'right-circle'"  @page-header-right-click="scanCode"></page-header>
+    </div>
+
+    <section class="content clearfix">
+      <ul class="home-order">
+        <li class="order-maintain" @click="orderMaintain"><span class="icon"></span>维修工单</li>
+        <li class="order-periodicity" @click="orderPeriodicity"><span class="icon"></span>维保工单</li>
+      </ul>
+    </section>
+
+  </div>
+</template>
+
+<script>
+  import PageHeader from '../commonComponents/page-header'
+
+  export default {
+    name: 'home',
+    components: {
+      PageHeader
+    },
+    methods: {
+      orderMaintain () {
+        this.$router.push({ path: '/order-maintain' })
+      },
+      orderPeriodicity () {
+        this.$router.push({ path: '/order-periodicity' })
+      },
+      scanCode () {
+        console.log('index header right-click')
+      }
+    }
+  }
+</script>
+
