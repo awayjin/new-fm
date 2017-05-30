@@ -25,6 +25,7 @@ Vue.use(VueResource)
 // 安装过滤器
 Vue.use(VueFilters)
 
+console.log('DetailBase.name:' + DetailBase.name)
 // 注册全局组件
 Vue.component(DetailBase.name, DetailBase)
 Vue.component(DetailAssist.name, DetailAssist)

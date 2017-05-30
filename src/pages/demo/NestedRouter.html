@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    a { display: block; }
+  </style>
+</head>
+<body>
+<a href="https://router.vuejs.org/zh-cn/essentials/dynamic-matching.html">动态路由匹配</a>
+
+<pre>
+1.动态路由匹配
+-1.1 把某种模式匹配到的所有路由，全都映射到同个组件
+    组件的生命周期钩子不会再被调用
+
+-1.2 动态路径参数（dynamic segment） 冒号 : 标记
+  匹配到路由时，设置到 this.$route.params
+
+-1.3 响应路由参数的变化
+   组件的生命周期钩子不会再被调用, watch（监测变化） $route 对象
+  
+2.嵌套路由
+-2.1 实应用中通常由多层嵌套的组件组合而成， 同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件
+
+-2.2 一个被渲染组件同样可以包含自己的嵌套 <router-view>
+-2.3 要在嵌套的出口中渲染组件，需要在 VueRouter 的参数中使用 children 配置
+</pre>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+<div id="app">
+  <p>
+    <router-link to="/user/foo">/user/foo</router-link>
+    <router-link to="/user/dd">/user/dd</router-link>
+    <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+    <router-link to="/user/ddd/profile">/user/ddd/profile</router-link>
+    <router-link to="/user/pro">/user/pro</router-link>
+    <router-link to="/user/ddd">/user/ddd</router-link>
+  </p>
+  <router-view></router-view>
+</div>
+
+<script>
+  const User = {
+    // 一个被渲染组件同样可以包含自己的嵌套
+    template: `
+      <div class="user">
+        <h2>User: {{ $route.params.id }}</h2>
+        <router-view></router-view>
+      </div>
+    `
+  }
+  const UserProfile = {
+    template: `<div>user profile {{ $route.params.id }}</div>`
+  }
+  
+  const router = new VueRouter({
+    routes: [
+      {
+        // 以 / 开头的嵌套路径会被当作根路径。 这让你充分的使用嵌套组件而无须设置嵌套的路径
+        path: '/user/:id',
+        component: User,
+        // 要在嵌套的出口中渲染组件，需要在 VueRouter 的参数中使用 children 配置
+        children: [
+          {
+            path: '',
+            component: {
+              template: `<div>user home {{ $route.params.id }}</div>`
+            }
+          },
+          {
+            // 当 /user/:id/profile 匹配成功，
+            // UserProfile 会被渲染在 User 的 <router-view> 中
+            path: 'profile',
+            component: UserProfile
+          }
+        ]
+      }
+    ]
+  })
+  
+  new Vue({ router }).$mount('#app')
+</script>
+
+<!--
+<div id="app">
+  <p>
+    <router-link to="/user/foo">/user/foo</router-link>
+    <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+    <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+    <router-link to="/user/foo/demo">/user/demo</router-link>
+  </p>
+  vi:<router-view></router-view>
+</div>
+
+<script>
+  const User = {
+    template: `
+    <div class="user">
+      <h2>User id:{{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `
+  }
+  
+  const UserHome = { template: '<div>Home</div>' }
+  const UserProfile = { template: '<div>Profile</div>' }
+  const UserPosts = { template: '<div>Posts</div>' }
+  const Demo = { template: '<div>Demo</div>' }
+  
+  const router = new VueRouter({
+    routes: [
+      { path: '/user/:id', component: User,
+        children: [
+          // UserHome will be rendered inside User's <router-view>
+          // when /user/:id is matched
+          { path: '', component: UserHome },
+          { path: 'demo', component: Demo },
+//          { path: 'demo', template: '<h2>demo</h2>' },
+          
+          // UserProfile will be rendered inside User's <router-view>
+          // when /user/:id/profile is matched
+          { path: 'profile', component: UserProfile },
+          
+          // UserPosts will be rendered inside User's <router-view>
+          // when /user/:id/posts is matched
+          { path: 'posts', component: UserPosts }
+        ]
+      }
+    ]
+  })
+  
+  const app = new Vue({ router }).$mount('#app')
+</script>
+-->
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    a { display: block; }
+  </style>
+</head>
+<body>
+<a href="https://router.vuejs.org/zh-cn/essentials/dynamic-matching.html" target="_blank">动态路由匹配</a>
+
+<pre>
+1.动态路由匹配
+-1.1 把某种模式匹配到的所有路由，全都映射到同个组件
+    组件的生命周期钩子不会再被调用
+
+-1.2 动态路径参数（dynamic segment） 冒号 : 标记
+  匹配到路由时，设置到 this.$route.params
+
+-1.3 响应路由参数的变化
+   组件的生命周期钩子不会再被调用, watch（监测变化） $route 对象
+  
+2.嵌套路由
+-2.1 实应用中通常由多层嵌套的组件组合而成， 同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件
+
+-2.2 一个被渲染组件同样可以包含自己的嵌套 <router-view>
+-2.3 要在嵌套的出口中渲染组件，需要在 VueRouter 的参数中使用 children 配置
+</pre>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+<div id="app">
+  <p>
+    <router-link to="/user/foo">/user/foo</router-link>
+    <router-link to="/user/bar">/user/bar</router-link>
+    <router-link to="/user/dd">/user/dd</router-link>
+    <router-link to="/user-name/dd/post/post-id">/user/dd/post/post-id</router-link>
+    <router-link to="/user-name/yourname/post/your-post-id">/user/dd/post/post-id</router-link>
+  </p>
+  <router-view></router-view>
+</div>
+
+<script>
+  const User = {
+    template: `<div>User2: {{ $route.params.idCom }} </div>`,
+    watch: {
+      '$route' (to, from) {
+        console.log(to)
+        console.log(from)
+      }
+    }
+  }
+  const UserName = {
+    template: `<div>UserName: {{ $route.params.username }} -{{ $route.params }} </div>`,
+    watch: {
+      '$route' (to, from) {
+        console.log(to)
+        console.log(from)
+      }
+    }
+  }
+  
+  const router = new VueRouter({
+    routes: [
+      {
+        path: '/user/:idCom',
+//        component: {
+//          template: `<div>User: {{ $route.params.id  }}</div>`
+//        },
+        component: User
+      },
+      // 多段路径参数
+      {
+        path: '/user-name/:username/post/:post_id',
+        component: UserName
+      }
+    ]
+  })
+  
+  const App = new Vue({ router }).$mount('#app')
+</script>
+</body>
+</html>

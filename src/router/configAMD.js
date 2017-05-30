@@ -60,6 +60,27 @@ export default {
       path: '/per-assist-child',
       component: resolve => require(['../pages/perAssistChild.vue'], resolve)
     },
+    // demo
+    {
+      path: '/demo-main',
+      component: resolve => require(['../pages/demo/demoMain'], resolve),
+      children: [
+        {
+          path: 'demo-first/:id?',
+          component: resolve => require(['../pages/demo/demoFirst.vue'], resolve)
+        }
+      ]
+    },
+    {
+      path: '/per-main/:id',
+      component: resolve => require(['../pages/perMain.vue'], resolve),
+      children: [
+        {
+          path: 'per-detail/:id',
+          component: resolve => require(['../pages/perDetail.vue'], resolve)
+        }
+      ]
+    },
     {
       path: '/main',
       component: resolve => require(['../pages/main.vue'], resolve),

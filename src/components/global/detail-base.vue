@@ -3,7 +3,7 @@
   @import "../../less/_vars";
   .detail-cause {
     width: 100%;
-    position: relative; 
+    position: relative;
     border-bottom: 1px solid  @gray-bg;
     .txt {
         color:@gray-brownish;
@@ -12,9 +12,9 @@
         border-top: 1px solid  @gray-bg;
         .two-line();
     }
-    .detail-title{ 
+    .detail-title{
         color:@gray-cool;
-        padding: 1.17rem 1.16rem 1.25rem 0.42rem;  
+        padding: 1.17rem 1.16rem 1.25rem 0.42rem;
         width:5.33rem;
         top: 0;
         left: 0;
